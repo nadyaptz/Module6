@@ -44,8 +44,7 @@ class Figure:
         return sum(self.__sides)
 
     def set_sides(self, *new_sides):
-        if self.__is_valid_sides(self, *new_sides):
-            if len(new_sides) == self.sides_count:
+        if self.__is_valid_sides(self, *new_sides) and len(new_sides) == self.sides_count:
                 self.__sides = list(new_sides)
 
 
