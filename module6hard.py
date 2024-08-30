@@ -79,18 +79,18 @@ class Triangle(Figure):
 
     def __init__(self, __color, *__sides, filled=False):
         super().__init__(__color, *__sides, filled=filled)
-        if not self.are_valid_triangle_sides():
+        if not self.__are_valid_triangle_sides():
             print('Не может быть треугольника с такими сторонами!')
 
 
-    def are_valid_triangle_sides(self): # проверим, может ли быть треугольник с такими сторонами
+    def __are_valid_triangle_sides(self): # проверим, может ли быть треугольник с такими сторонами
         a = self.get_sides()[0]
         b = self.get_sides()[1]
         c = self.get_sides()[2]
         return a + b > c and a + c > b and b + c > a
 
     def get_square(self):
-        if self.are_valid_triangle_sides():
+        if self.__are_valid_triangle_sides():
             a = self.get_sides()[0]
             b = self.get_sides()[1]
             c = self.get_sides()[2]
