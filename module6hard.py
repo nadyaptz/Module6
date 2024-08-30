@@ -31,7 +31,7 @@ class Figure:
     def __is_valid_sides(self, *sides):
         if len(sides) == self.sides_count:
             for side in sides:
-                if not isinstance(side, int) and side <= 0:
+                if not isinstance(side, int) or side <= 0:
                     return False
             return True
         else:
@@ -44,8 +44,9 @@ class Figure:
         return sum(self.__sides)
 
     def set_sides(self, *new_sides):
-        if len(new_sides) == self.sides_count:
-            self.__sides = list(new_sides)
+        if self.__is_valid_sides(self, *new_sides):
+            if len(new_sides) == self.sides_count:
+                self.__sides = list(new_sides)
 
 
 class Circle(Figure):
