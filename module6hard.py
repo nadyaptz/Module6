@@ -11,10 +11,6 @@ class Figure:
         if len(self.__color) != 3:
             print('Неправильный ввод цвета! Должно быть 3 числа (формат RGB)')
             exit()
-        if isinstance(self, Cube):
-            if len(self.__sides) == 1:
-                for i in range(0, self.sides_count - 1):
-                    self.__sides.append(self.__sides[0])
 
         if len(self.__sides) != self.sides_count:
             self.__sides = []
@@ -25,30 +21,19 @@ class Figure:
         return self.__color
 
     def __is_valid_color(self, r, g, b):
-
         return 0 <= r <= 255 and 0 <= g <= 255 and 0 <= b <= 255
 
     def set_color(self, r, g, b):
         if self.__is_valid_color(r, g, b):
-            self.__color[0] = r
-            self.__color[1] = g
-            self.__color[2] = b
+            self.__color = [r, g, b]
         return self.__color
 
     def __is_valid_sides(self, *sides):
-        self.sides = sides  # кортеж из sides
-        valid_flag = False
         if len(sides) == self.sides_count:
             for side in sides:
-                if isinstance(side, int) and side > 0:
-                    valid_flag = True
-                else:
-                    valid_flag = False
-                    break
-            if valid_flag == True:
-                return True
-            else:
-                return False
+                if not isinstance(side, int) and side <= 0:
+                    return False
+            return True
         else:
             return False
 
@@ -102,7 +87,10 @@ class Cube(Figure):
     sides_count = 12
 
     def __init__(self, __color, *__sides, filled=False):
+        if len(__sides) == 1:
+            __sides = [__sides[0]] * 12
         super().__init__(__color, *__sides, filled=filled)
+
 
     def get_square(self):
         return (self.get_sides()[0] ** 2) * 6
